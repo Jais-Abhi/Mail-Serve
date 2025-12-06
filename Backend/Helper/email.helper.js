@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer"
-
+import emailFormat from "./emailFormat";
+import dotenv from "dotenv";
+dotenv.config();
 
 const sendOtp =  async(email,otp)=>{
 const transporter = nodemailer.createTransport({
@@ -7,17 +9,17 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: "buildwithme.web@gmail.com",
-    pass: "mskk jnyx ibaa vazu",
+    user: process.env.USER ,
+    pass: process.env.PASS ,
   },
   });
 
  const info = await transporter.sendMail({
-    from: '"Abhishek Jaiswal" buildwithme.web@gmail.com',
+    from: `"Abhishek Jaiswal" ${process.env.USER}`, // sender address
     to: email,
     subject: "OTP ✔",
     text: "hello User Verify your Account", // plain‑text body
-    html: `<b>${otp}</b>`, // HTML body
+    html: emailFormat(otp), // HTML body
   });
 
   console.log("Message sent:",info, info.messageId);
