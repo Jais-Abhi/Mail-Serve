@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from "cors"
 import emailRoute from './Routes/EmailRoute.js';
+import connectDB from './Helper/db.connection.js';
 dotenv.config()
 const app = express();
 
@@ -11,8 +12,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.listen(port,()=>{
+app.listen(port,async()=>{
     console.log("app is running on port",port)
+    await connectDB();
 })
 
 app.use(cors({

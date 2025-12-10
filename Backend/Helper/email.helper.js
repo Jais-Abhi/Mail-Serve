@@ -1,9 +1,10 @@
 import nodemailer from "nodemailer"
-import emailFormat from "./emailFormat";
+import emailFormat from "./emailFormat.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 const sendOtp =  async(email,otp)=>{
+  console.log(email,otp);
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -13,6 +14,8 @@ const transporter = nodemailer.createTransport({
     pass: process.env.PASS ,
   },
   });
+
+    console.log(email,otp);
 
  const info = await transporter.sendMail({
     from: `"Abhishek Jaiswal" ${process.env.USER}`, // sender address

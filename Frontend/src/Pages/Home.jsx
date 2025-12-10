@@ -13,11 +13,15 @@ const Home = () => {
       alert('Please enter an email')
       return
     }
-    setLoading(true)
-    const result = await axios.post('http://localhost:8000/email/sendOtp', { email });
-    console.log(result)
-    setLoading(false)
-    setOtpSent(true)
+    try {
+      setLoading(true)
+      const result = await axios.post('http://localhost:8000/email/sendOtp', { email });
+      console.log(result)
+      setLoading(false)
+      setOtpSent(true)
+    } catch (error) {
+      console.log(error)
+    }
     // Simulate API call
   }
 

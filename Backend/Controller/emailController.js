@@ -13,7 +13,7 @@ const sendOtpController = async(req,res)=>{
         res.status(200).json({ message: "OTP sent successfully", otp });
     
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        res.status(500).json(error,{ message: "Internal Server Error" });
     }
 }
 
