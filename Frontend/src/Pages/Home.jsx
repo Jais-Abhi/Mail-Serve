@@ -22,25 +22,30 @@ const Home = () => {
     } catch (error) {
       console.log(error)
     }
-    // Simulate API call
   }
 
-  const handleVerifyEmail = (e) => {
+  const handleVerifyEmail = async(e) => {
     e.preventDefault()
     if (!otp) {
       alert('Please enter OTP')
       return
     }
     setLoading(true)
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const result = await axios.post('http://localhost:8000/email/verify', { email,otp });
       setLoading(false)
       alert('Email verified successfully!')
       setEmail('')
       setOtp('')
       setOtpSent(false)
-    }, 1000)
+    } catch (error) {
+      setOtp("")
+      setLoading(false)
+      if(error.response && error.response.data){
+      alert("Invalid OTP. Please try send otp again.")
+    }
   }
+}
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
@@ -78,7 +83,6 @@ const Home = () => {
         {otpSent && <div className="border-t border-gray-600 my-8"></div>}
 
         {/* Second Row - OTP and Verify Email */}
-        {otpSent && (
           <div>
             <div className="space-y-4">
               <div>
@@ -104,7 +108,6 @@ const Home = () => {
               </button>
             </div>
           </div>
-        )}
       </div>
     </div>
   )

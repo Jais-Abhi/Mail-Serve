@@ -5,7 +5,8 @@ dotenv.config();
 
 const sendOtp =  async(email,otp)=>{
   console.log(email,otp);
-const transporter = nodemailer.createTransport({
+try {
+  const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // true for 465, false for other ports
@@ -26,6 +27,12 @@ const transporter = nodemailer.createTransport({
   });
 
   console.log("Message sent:",info, info.messageId);
+  return ({status: 201, message : "otp send successfull"})
+} catch (error) 
+{
+    return ({status: 500, message : "failed to send otp", error: error.message})
+
+}
   
 }
 

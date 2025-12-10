@@ -9,9 +9,14 @@ const emailSchema = new mongoose.Schema({
     otp : {
         type : String,
         required : true
+    },
+    expireAt: {
+        type: Date,
+        default: Date.now,
+        expires: 30
     }
     
-},{timestamps:true})
+},{timestamps: true})
 
 const Email = mongoose.model("Email",emailSchema)
 
