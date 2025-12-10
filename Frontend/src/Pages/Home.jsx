@@ -4,7 +4,8 @@ import SendButton from '../Components/SendButton';
 
 const Home = () => {
   const [email, setEmail] = useState('')
-  const [otp, setOtp] = useState(false)
+  const [otpSent, setOtpSent] = useState(false)
+  const [otp, setOtp] = useState("")
   const [otpSending, setOtpSending] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -15,14 +16,14 @@ const Home = () => {
       return
     }
     try {
-      otpSending(true)
+      setOtpSending(true)
       const result = await axios.post('http://localhost:8000/email/sendOtp', { email });
-      otpSending(false)
-      otpSent(true)
+      setOtpSending(false)
+      setOtpSent(true)
       console.log(result)
     } catch (error) {
-      otpSending(false)
-      otpSent(true)
+      setOtpSending(false)
+      setOtpSent(false)
       console.log(error)
     }
   }
@@ -40,10 +41,10 @@ const Home = () => {
       alert('Email verified successfully!')
       setEmail('')
       setOtp('')
-      setOtpSent(false)
     } catch (error) {
       setOtp("")
       setOtpSending(false)
+      setOtpSent(false)
       setLoading(false)
       if(error.response && error.response.data){
       alert("Invalid OTP. Please try send otp again.")
@@ -69,7 +70,7 @@ const Home = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                disabled={otpSent}
+                disabled={otp}
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition"
               />
             </div>
@@ -85,7 +86,7 @@ const Home = () => {
         </div>
 
         {/* Divider */}
-        {otpSent && <div className="border-t border-gray-600 my-8"></div>}
+        <div className="border-t border-gray-600 my-8"></div>
 
         {/* Second Row - OTP and Verify Email */}
           <div>
