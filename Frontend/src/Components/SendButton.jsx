@@ -1,19 +1,27 @@
 import React, { useEffect } from 'react'
 
-const SendButton = ({handleSendOtp,otpSending,otpSent,timer,setTimer}) => {
+const SendButton = ({handleSendOtp,otpSending,otpSent,setOtpSent,timer,setTimer}) => {
+
+
   useEffect(()=>{
     if(!otpSent) return;
+
     const countdown = setInterval(()=>{
-      console.log(timer)
-      if(timer<=0) {
-        clearInterval(countdown);
-        return 0;
-      }
-      else{
-        setTimer((pre)=> pre-1);
-      }
+        setTimer((pre)=> {
+          console.log(pre)
+          if(pre <=1){
+            clearInterval(countdown);
+            setOtpSent(false);
+            return 0;
+          }
+          else{
+            return pre -1;
+          }
+        });
       
     },1000)
+
+    return () => clearInterval(countdown);
   },[otpSent])
 
   return (
