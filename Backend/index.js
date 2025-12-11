@@ -18,7 +18,11 @@ app.listen(port,async()=>{
 })
 
 app.use(cors({
-    origin:"http://localhost:5173",
+    //for development
+    // origin:"http://localhost:5173",
+
+    //for production
+    origin:"https://mail-serve.onrender.com",
     credentials:true,
 }));
 

@@ -79,8 +79,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-600 my-8"></div>
+       <div className="border-t border-gray-600 my-8"></div>
 
         {/* Second Row - OTP and Verify Email */}
           <div>
