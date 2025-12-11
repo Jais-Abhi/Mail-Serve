@@ -8,6 +8,8 @@ const Home = () => {
   const [otp, setOtp] = useState("")
   const [otpSending, setOtpSending] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [timer ,setTimer] = useState(0)
+
 
   const handleSendOtp = async(e) => {
     e.preventDefault()
@@ -20,6 +22,7 @@ const Home = () => {
       const result = await axios.post('http://localhost:8000/email/sendOtp', { email });
       setOtpSending(false)
       setOtpSent(true)
+      setTimer(30)
       console.log(result)
     } catch (error) {
       setOtpSending(false)
@@ -74,14 +77,7 @@ const Home = () => {
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition"
               />
             </div>
-            <SendButton handleSendOtp={handleSendOtp} otpSending={otpSending} otpSent={otpSent} />
-            {/* <button
-              onClick={handleSendOtp}
-              disabled={otpSent || loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
-            >
-              {loading ? 'Sending...' : otpSent ? 'OTP Sent' : 'Send OTP'}
-            </button> */}
+            <SendButton handleSendOtp={handleSendOtp} otpSending={otpSending} otpSent={otpSent} timer={timer} setTimer={setTimer} />
           </div>
         </div>
 
