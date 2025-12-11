@@ -16,7 +16,7 @@ try {
   },
   });
 
-    console.log(email,otp);
+    console.log("in email helper",email,otp);
 
  const info = await transporter.sendMail({
     from: `"Abhishek Jaiswal" ${process.env.USER}`, // sender address
@@ -30,6 +30,7 @@ try {
   return ({status: 201, message : "otp send successfull"})
 } catch (error) 
 {
+  console.log("error in sending otp",error)
     return ({status: 500, message : "failed to send otp", error: error.message})
 
 }
