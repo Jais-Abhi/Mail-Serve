@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import SendButton from '../Components/SendButton';
+import { server } from '../main.jsx';
 
 const Home = () => {
   const [email, setEmail] = useState('')
@@ -19,7 +20,7 @@ const Home = () => {
     }
     try {
       setOtpSending(true)
-      const result = await axios.post('http://localhost:8000/email/sendOtp', { email });
+      const result = await axios.post(`${server}/email/sendotp`, { email });
       setOtpSending(false)
       setOtpSent(true)
       setTimer(30)
@@ -39,7 +40,7 @@ const Home = () => {
     }
     setLoading(true)
     try {
-      const result = await axios.post('http://localhost:8000/email/verify', { email,otp });
+      const result = await axios.post(`${server}/email/verify`, { email,otp });
       setLoading(false)
       alert('Email verified successfully!')
       setEmail('')
