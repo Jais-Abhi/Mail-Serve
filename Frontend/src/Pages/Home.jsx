@@ -46,8 +46,6 @@ const Home = () => {
       setOtp('')
     } catch (error) {
       setOtp("")
-      setOtpSending(false)
-      setOtpSent(false)
       setLoading(false)
       if(error.response && error.response.data){
       alert("Invalid OTP. Please try send otp again.")
@@ -73,7 +71,7 @@ const Home = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                disabled={otpSent}
+                disabled={otpSent || otpSending}
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition"
               />
             </div>
