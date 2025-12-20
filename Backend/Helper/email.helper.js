@@ -10,6 +10,9 @@ try {
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // true for 465, false for other ports
+  requireTLS:true, // produce STARTTLS
+  logger:true, // log to console
+  debug:true, // include SMTP traffic in the logs
   auth: {
     user: process.env.USER ,
     pass: process.env.PASS ,
