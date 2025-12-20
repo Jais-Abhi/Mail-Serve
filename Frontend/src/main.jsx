@@ -6,10 +6,10 @@ import { BrowserRouter } from 'react-router-dom'
 
 
 //for development change also in backend/index.js
-export const server = "http://localhost:8000"
+// export const server = "http://localhost:8000"
 
 //for production change also in backend/index.js
-// export const server = "https://mail-serve-backend.onrender.com"
+export const server = "https://mail-serve-backend.onrender.com"
 
 
 
